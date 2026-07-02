@@ -5,36 +5,27 @@ let liveProducts = [];
 
 // Thêm 2 biến này vào đầu file app.js
 let currentPage = 1;
-const productsPerPage = 18;
+const productsPerPage = 15;
 
-// Sửa hàm renderProducts thành như sau:
-function renderProducts(list) {
-    const productContainer = document.getElementById("productContainer");
-    if (!productContainer) return;
+function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / productsPerPage);
+    const container = document.getElementById("paginationContainer");
+    if (!container) return;
+    container.innerHTML = "";
 
-    // 1. Tính toán sản phẩm của trang hiện tại
-    const startIndex = (currentPage - 1) * productsPerPage;
-    const endIndex = startIndex + productsPerPage;
-    const pageItems = list.slice(startIndex, endIndex);
+    // Hiển thị tối đa 5 trang
+    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+        const btn = document.createElement("button");
+        btn.innerText = i;
+        if (i === currentPage) btn.classList.add("active");
 
-    productContainer.innerHTML = "";
-    
-    // 2. Render 18 sản phẩm
-    pageItems.forEach((p) => {
-        const imgUrl = Array.isArray(p.image) ? p.image[0] : p.image;
-        productContainer.innerHTML += `
-            <div class="product">
-               <img src="${imgUrl}" onerror="this.src='https://placehold.co/150x150?text=PIN'">
-               <div class="product-info">
-                   <p class="product-name">${p.name}</p>
-                   <p class="product-price">${Number(p.price).toLocaleString()}đ</p>
-               </div>
-            </div>
-        `;
-    });
-
-    // 3. Gọi hàm tạo nút chuyển trang
-    renderPagination(list.length);
+        btn.onclick = () => {
+            currentPage = i;
+            renderProducts(liveProducts);
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        };
+        container.appendChild(btn);
+    }
 }
 
 function renderPagination(totalItems) {
