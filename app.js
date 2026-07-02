@@ -1,19 +1,18 @@
-// 1. URL API Web App của bạn
+// 1. CẤU HÌNH
 const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP1jjCYB6YMQAZ-B3IgrxpbeMaumndi4OP0yk5AJDu_7dLAQ/exec';
-
 let liveProducts = []; 
-
-// Thêm 2 biến này vào đầu file app.js
 let currentPage = 1;
-const productsPerPage = 15;
+const productsPerPage = 15; // 3 hàng x 5 sản phẩm/hàng
 
+// 2. HÀM PHÂN TRANG (Chỉ hiện tối đa 5 nút)
 function renderPagination(totalItems) {
     const totalPages = Math.ceil(totalItems / productsPerPage);
     const container = document.getElementById("paginationContainer");
     if (!container) return;
+    
     container.innerHTML = "";
-
-    // Hiển thị tối đa 5 trang
+    
+    // Vòng lặp chỉ chạy tới 5 hoặc tổng số trang
     for (let i = 1; i <= Math.min(totalPages, 5); i++) {
         const btn = document.createElement("button");
         btn.innerText = i;
@@ -28,43 +27,45 @@ function renderPagination(totalItems) {
     }
 }
 
-function renderPagination(totalItems) {
-    const totalPages = Math.ceil(totalItems / productsPerPage);
-    const container = document.getElementById("paginationContainer");
-    
-    // Nếu không tìm thấy thẻ trong index.html thì dừng, không tự tạo lung tung
-    if (!container) return; 
-    
-    container.innerHTML = "";
-    for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement("button");
-        btn.innerText = i;
-        btn.style.margin = "0 5px";
-        btn.onclick = () => {
-            currentPage = i;
-            renderProducts(liveProducts);
-            window.scrollTo({ top: document.getElementById('products').offsetTop, behavior: 'smooth' });
-        };
-        if (i === currentPage) btn.style.fontWeight = "bold";
-        container.appendChild(btn);
-    }
+// 3. HÀM HIỂN THỊ SẢN PHẨM
+function renderProducts(list) {
+    const productContainer = document.getElementById("productContainer");
+    if (!productContainer) return;
+
+    // Tính toán chỉ mục sản phẩm
+    const startIndex = (currentPage - 1) * productsPerPage;
+    const endIndex = startIndex + productsPerPage;
+    const pageItems = list.slice(startIndex, endIndex);
+
+    productContainer.innerHTML = "";
+    pageItems.forEach((p) => {
+        const imgUrl = Array.isArray(p.image) ? p.image[0] : p.image;
+        productContainer.innerHTML += `
+            <div class="product">
+               <img src="${imgUrl}" onerror="this.src='https://placehold.co/150x150?text=PIN'">
+               <div class="product-info">
+                   <p class="product-name">${p.name}</p>
+                   <p class="product-price">${Number(p.price).toLocaleString()}đ</p>
+               </div>
+            </div>
+        `;
+    });
+
+    renderPagination(list.length);
 }
 
-// 3. Hàm lấy dữ liệu
+// 4. HÀM LẤY DỮ LIỆU
 async function fetchProductsFromSheets() {
     try {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Không thể kết nối tới Google Sheets');
-        
         const data = await response.json();
         liveProducts = data; 
-        
-        // Gọi hàm render sau khi đã có dữ liệu
         renderProducts(liveProducts); 
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
     }
 }
 
-// 4. Gọi hàm tải dữ liệu khi trang web được tải
+// Khởi chạy
 fetchProductsFromSheets();
