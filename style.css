@@ -397,3 +397,29 @@ header {
         gap: 10px !important;
     }
 }
+
+/* --- SỬA LỖI HEADER TRÀN BỐ CỤC (Màn hình trung bình: 769px - 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+    header {
+        padding: 10px 20px !important; /* Giảm padding từ 10% xuống để lấy không gian */
+        gap: 15px !important;         /* Giảm khoảng cách giữa logo - search - menu */
+    }
+
+    .header-search {
+        max-width: 300px !important;  /* Giới hạn độ rộng search bar để menu không bị đẩy */
+        margin: 0 10px !important;
+    }
+
+    #navbar {
+        gap: 10px !important;         /* Thu hẹp khoảng cách menu */
+    }
+
+    #navbar a {
+        font-size: 13px !important;   /* Giảm cỡ chữ menu một chút để vừa vặn */
+    }
+}
+
+/* Đảm bảo không có phần tử nào "thừa" bị out box */
+body {
+    overflow-x: hidden; /* Chống cuộn ngang ngoài ý muốn */
+}
