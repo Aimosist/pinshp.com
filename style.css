@@ -252,22 +252,28 @@ section h2 {
     margin: 10px 0; 
 }
 
-.logo-container {
+.logo-wrapper {
     display: flex;
-    align-items: baseline; /* Giúp căn đáy chữ cho thẳng hàng */
-    gap: 15px; /* Khoảng cách giữa MAI và BATERÍA */
+    align-items: baseline; /* Giúp căn đáy chữ thẳng hàng */
+    gap: 10px;
+    padding: 5px 0;
 }
 
-.logo-main {
-    font-size: 45px; /* Tỷ lệ 3 phần */
+.logo-icon {
+    width: 60px; /* Điều chỉnh kích thước icon cho khớp */
+    height: 60px;
+}
+
+.text-mai {
+    font-size: 50px; /* 3 phần */
     font-weight: 900;
     color: white;
     font-family: sans-serif;
     letter-spacing: -2px;
 }
 
-.logo-sub {
-    font-size: 30px; /* Tỷ lệ 2 phần (30 là 2/3 của 45) */
+.text-bateria {
+    font-size: 33px; /* 2 phần (tỷ lệ 3:2) */
     font-weight: 600;
     color: white;
     font-family: sans-serif;
