@@ -368,3 +368,27 @@ footer{
     background: #ee4d2d;
     color: white;
 }
+
+/* Căn giữa cụm phân trang */
+#paginationContainer {
+    display: flex;        /* Dùng flexbox để điều khiển các nút */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    gap: 10px;           /* Khoảng cách giữa các nút */
+    margin: 20px 0;      /* Khoảng cách trên dưới */
+}
+
+/* Tùy chỉnh thêm để nút đẹp hơn */
+#paginationContainer button {
+    padding: 8px 15px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid #ee4d2d;
+    color: #ee4d2d;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+#paginationContainer button:hover {
+    background: #ee4d2d;
+    color: white;
+}
