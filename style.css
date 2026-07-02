@@ -150,3 +150,9 @@ footer { margin-top: 30px; padding: 16px; text-align: center; background: #333; 
 .detail-content { display: flex; gap: 16px; }
 .detail-content img { width: 50%; border-radius: 10px; }
 .buy-btn { margin-top: 10px; padding: 10px; width: 100%; background: #ee4d2d; color: white; border: none; border-radius: 8px; cursor: pointer; }
+
+h2 {
+    font-size: 28px; /* Thay đổi kích thước này */
+    margin-bottom: 20px;
+    font-weight: bold; /* Tạo độ đậm cho chữ */
+}
