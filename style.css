@@ -220,3 +220,27 @@ section h2 {
 @media(max-width:768px){
     .swiper { height: 180px; }
 }
+
+
+/* Chỉ dành cho phần Tin tức */
+#newsContainer {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* Giúp tự xuống dòng trên điện thoại */
+    justify-content: center;
+}
+
+.news-item {
+    flex: 1;
+    min-width: 300px; /* Độ rộng tối thiểu để ảnh không quá nhỏ */
+    max-width: 390px;
+    text-align: center;
+}
+
+.news-item img {
+    width: 100%;
+    height: 380px;
+    object-fit: contain; /* QUAN TRỌNG: Hiển thị toàn bộ ảnh không bị cắt */
+    background-color: #ffffff; /* Nền trắng sạch sẽ cho các khoảng trống */
+    border-radius: 8px;
+}
