@@ -165,3 +165,19 @@ section h2 {
     margin-bottom: 20px;
     font-weight: bold;
 }
+
+#aboutContainer, #contactContainer {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #444;
+}
+
+#aboutContainer p, #contactContainer p {
+    margin-bottom: 10px;
+}
+
+#contactContainer a {
+    color: #ee4d2d;
+    font-weight: bold;
+    text-decoration: none;
+}
