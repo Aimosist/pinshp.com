@@ -222,25 +222,32 @@ section h2 {
 }
 
 
-/* Chỉ dành cho phần Tin tức */
-#newsContainer {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap; /* Giúp tự xuống dòng trên điện thoại */
-    justify-content: center;
+/* Container tin tức */
+#newsContainer { 
+    display: flex; 
+    gap: 15px; 
+    flex-wrap: wrap; 
+    justify-content: center; 
 }
 
-.news-item {
-    flex: 1;
-    min-width: 300px; /* Độ rộng tối thiểu để ảnh không quá nhỏ */
-    max-width: 390px;
-    text-align: center;
+/* Các item tin tức */
+.news-item { 
+    flex: 1; 
+    min-width: 300px; 
+    max-width: 390px; 
 }
 
-.news-item img {
-    width: 100%;
-    height: 380px;
-    object-fit: contain; /* QUAN TRỌNG: Hiển thị toàn bộ ảnh không bị cắt */
-    background-color: #ffffff; /* Nền trắng sạch sẽ cho các khoảng trống */
+/* Ảnh tin tức: Sử dụng contain để hiển thị trọn vẹn */
+.news-item img { 
+    width: 100%; 
+    height: 300px; /* Bạn có thể chỉnh chiều cao này tùy ý */
+    object-fit: contain; /* KHÔNG BỊ CẮT */
+    background-color: #ffffff; /* Nền trắng sạch */
     border-radius: 8px;
+    border: 1px solid #eee; /* Thêm viền nhẹ cho đẹp */
+}
+
+.news-item h3 { 
+    font-size: 16px; 
+    margin: 10px 0; 
 }
