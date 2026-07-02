@@ -354,30 +354,14 @@ footer{
     cursor:pointer;
 }
 
-/* Thêm vào cuối file style.css */
-#paginationContainer button {
-    padding: 8px 15px;
-    cursor: pointer;
-    border: 1px solid #ee4d2d;
-    background: white;
-    color: #ee4d2d;
-    border-radius: 4px;
-}
-
-#paginationContainer button:hover {
-    background: #ee4d2d;
-    color: white;
-}
-
-/* Căn giữa cụm phân trang */
+/* ================= PHÂN TRANG (PAGINATION) ================= */
 #paginationContainer {
-    display: flex;        /* Dùng flexbox để điều khiển các nút */
+    display: flex;           /* Dùng flexbox để điều khiển các nút */
     justify-content: center; /* Căn giữa theo chiều ngang */
-    gap: 10px;           /* Khoảng cách giữa các nút */
-    margin: 20px 0;      /* Khoảng cách trên dưới */
+    gap: 10px;               /* Khoảng cách giữa các nút */
+    margin: 20px 0;          /* Khoảng cách trên dưới */
 }
 
-/* Tùy chỉnh thêm để nút đẹp hơn */
 #paginationContainer button {
     padding: 8px 15px;
     cursor: pointer;
@@ -388,7 +372,8 @@ footer{
     transition: 0.3s;
 }
 
-#paginationContainer button:hover {
+#paginationContainer button:hover, 
+#paginationContainer button.active {
     background: #ee4d2d;
     color: white;
 }
