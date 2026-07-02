@@ -252,29 +252,24 @@ section h2 {
     margin: 10px 0; 
 }
 
-header {
+.logo-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ee4d2d;
-    padding: 12px 24px;
+    align-items: baseline; /* Giúp căn đáy chữ cho thẳng hàng */
+    gap: 15px; /* Khoảng cách giữa MAI và BATERÍA */
 }
 
-#navbar {
-    display: flex;
-    gap: 20px;
-}
-
-#navbar a {
+.logo-main {
+    font-size: 45px; /* Tỷ lệ 3 phần */
+    font-weight: 900;
     color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600; /* Đậm vừa phải, không cần quá lố */
-    text-transform: uppercase;
-    opacity: 0.9;
+    font-family: sans-serif;
+    letter-spacing: -2px;
 }
 
-#navbar a:hover {
-    opacity: 1;
-    text-decoration: underline; /* Shopee hay dùng kiểu này */
+.logo-sub {
+    font-size: 30px; /* Tỷ lệ 2 phần (30 là 2/3 của 45) */
+    font-weight: 600;
+    color: white;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 }
