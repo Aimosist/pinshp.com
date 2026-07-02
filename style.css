@@ -320,3 +320,39 @@ section h2 {
     border-color: #ee4d2d;
     box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3);
 }
+
+/* 1. Tinh chỉnh lại Header và Logo */
+header {
+    padding: 12px 5%; /* Tăng padding 2 bên để không sát lề */
+    /* ... các thuộc tính cũ giữ nguyên ... */
+}
+
+.logo {
+    margin-left: 10px; /* Đẩy logo ra xa mép trái màn hình */
+}
+
+
+/* 2. Tinh chỉnh Navigation cho to và nổi bật */
+#navbar { 
+    display: flex; 
+    gap: 30px; /* Tăng khoảng cách giữa các mục */
+    align-items: center;
+}
+
+#navbar a { 
+    color: white; 
+    text-decoration: none; 
+    font-size: 16px;       /* Tăng size chữ */
+    font-weight: 600;      /* Làm chữ đậm hơn */
+    padding: 8px 15px;     /* Tăng vùng nhấn */
+    border-radius: 6px;    /* Bo góc nhẹ */
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+/* 3. Hiệu ứng làm menu nổi bật khi di chuột vào */
+#navbar a:hover { 
+    background: rgba(255, 255, 255, 0.2); /* Tạo nền mờ khi hover */
+    opacity: 1;
+    transform: translateY(-1px); /* Hiệu ứng nhấp nhô nhẹ */
+}
