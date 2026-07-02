@@ -1,18 +1,18 @@
 // 1. CẤU HÌNH
 const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP1jjCYB6YMQAZ-B3IgrxpbeMaumndi4OP0yk5AJDu_7dLAQ/exec';
 let liveProducts = []; 
+let displayedProducts = []; // Biến này để lưu danh sách đang hiển thị (sau khi lọc)
 let currentPage = 1;
-const productsPerPage = 15; // 3 hàng x 5 sản phẩm/hàng
+const productsPerPage = 15; 
 
-// 2. HÀM PHÂN TRANG (Chỉ hiện tối đa 5 nút)
-function renderPagination(totalItems) {
-    const totalPages = Math.ceil(totalItems / productsPerPage);
+// 2. HÀM PHÂN TRANG
+function renderPagination(list) {
+    const totalPages = Math.ceil(list.length / productsPerPage);
     const container = document.getElementById("paginationContainer");
     if (!container) return;
     
     container.innerHTML = "";
     
-    // Vòng lặp chỉ chạy tới 5 hoặc tổng số trang
     for (let i = 1; i <= Math.min(totalPages, 5); i++) {
         const btn = document.createElement("button");
         btn.innerText = i;
@@ -20,7 +20,7 @@ function renderPagination(totalItems) {
 
         btn.onclick = () => {
             currentPage = i;
-            renderProducts(liveProducts);
+            renderProducts(list); // Truyền đúng danh sách đang hiển thị vào
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         };
         container.appendChild(btn);
@@ -32,7 +32,6 @@ function renderProducts(list) {
     const productContainer = document.getElementById("productContainer");
     if (!productContainer) return;
 
-    // Tính toán chỉ mục sản phẩm
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
     const pageItems = list.slice(startIndex, endIndex);
@@ -51,21 +50,54 @@ function renderProducts(list) {
         `;
     });
 
-    renderPagination(list.length);
+    renderPagination(list); // Truyền danh sách vào hàm phân trang
 }
 
-// 4. HÀM LẤY DỮ LIỆU
+// 4. HÀM DANH MỤC
+function renderCategories(list) {
+    const categoryContainer = document.getElementById("categoryContainer");
+    if (!categoryContainer) return;
+
+    const categories = [...new Set(list.map(p => p.category))];
+
+    categoryContainer.innerHTML = "";
+    categoryContainer.innerHTML += `<button onclick="filterByCategory('all')">Tất cả</button>`;
+
+    categories.forEach(cat => {
+        if(cat && cat.trim() !== "") { 
+            categoryContainer.innerHTML += `<button onclick="filterByCategory('${cat}')">${cat}</button>`;
+        }
+    });
+}
+
+// Hàm lọc sản phẩm (Đã sửa lỗi)
+function filterByCategory(category) {
+    currentPage = 1; // Reset về trang 1 khi bấm danh mục mới
+    if (category === 'all') {
+        displayedProducts = liveProducts;
+    } else {
+        displayedProducts = liveProducts.filter(p => p.category === category);
+    }
+    renderProducts(displayedProducts); // Hiển thị list đã lọc
+}
+
+// 5. HÀM LẤY DỮ LIỆU
 async function fetchProductsFromSheets() {
     try {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Không thể kết nối tới Google Sheets');
         const data = await response.json();
+        
         liveProducts = data; 
-        renderProducts(liveProducts); 
+        displayedProducts = data; // Mặc định lúc đầu hiển thị tất cả
+        
+        renderProducts(displayedProducts); 
+        renderCategories(liveProducts); 
+        
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
     }
 }
 
 // Khởi chạy
-fetchProductsFromSheets();
+document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
