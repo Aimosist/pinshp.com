@@ -38,14 +38,34 @@
         </nav>
     </header>
 
-   <section id="home">
+<section id="home">
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="anh1.jpg" style="width:100%; border-radius:12px;"></div>
-            <div class="swiper-slide"><img src="anh2.jpg" style="width:100%; border-radius:12px;"></div>
+            <div class="swiper-slide"><img src="https://i.postimg.cc/J4jCZXg5/roc.jpg" style="width:100%; border-radius:12px;"></div>
+            <div class="swiper-slide"><img src="https://i.postimg.cc/3W5VpHdS/vn-11134207-820l4-mhwxv9g5boxw97.jpg" style="width:100%; border-radius:12px;"></div>
+            <div class="swiper-slide"><img src="https://i.postimg.cc/XJPTj53w/pw1.png" style="width:100%; border-radius:12px;"></div>
+            <div class="swiper-slide"><img src="https://i.postimg.cc/j2JBLjSV/vn-11134207-820l4-mfamh0n46bk985.jpg" style="width:100%; border-radius:12px;"></div>
+            <div class="swiper-slide"><img src="https://i.postimg.cc/2yBgV58v/sc181.png" style="width:100%; border-radius:12px;"></div>
         </div>
+        <div class="swiper-pagination"></div>
     </div>
 </section>
+
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 2500, // Tự chuyển ảnh sau 2.5 giây
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    loop: true, // Cho phép xoay vòng vô tận
+  });
+</script>
 
 <script>
   var swiper = new Swiper(".mySwiper", {
