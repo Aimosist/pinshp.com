@@ -251,3 +251,26 @@ section h2 {
     font-size: 16px; 
     margin: 10px 0; 
 }
+
+/* Import font Montserrat từ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap');
+
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Đổ bóng nhẹ cho sang */
+}
+
+.logo-text .highlight {
+    font-weight: 400; /* Chữ BATERÍA mỏng hơn */
+    color: #ffd700; /* Màu vàng kim loại (vàng gold) thay vì vàng chói */
+    background: linear-gradient(to right, #ffd700, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Hiệu ứng chữ ánh kim */
+    font-style: italic; /* Nghiêng nhẹ tạo cảm giác chuyển động */
+}
