@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PIN SHOP</title>
+
+    <meta name="description" content="Chuyên cung cấp pin chính hãng, pin công nghiệp và thiết bị điện.">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+
+<header id="header">
+        <div class="logo">
+            <h2 style="margin: 0; cursor: pointer;">PIN SHOP</h2>
+        </div>
+
+        <div class="header-search">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+            <button id="searchBtn">
+                <svg viewBox="0 0 19 19" width="16" height="16" fill="currentColor"><path d="M18.86 17.65l-5.6-5.6a7.7 7.7 0 1 0-1.2 1.2l5.6 5.6a.85.85 0 0 0 1.2-1.2zM7.75 13.8a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path></svg>
+            </button>
+        </div>
+
+        <nav id="navbar">
+            <a href="#home">Trang chủ</a>
+            <a href="#products">Sản phẩm</a>
+            <a href="#news">Tin tức</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div id="bannerContainer"></div>
+    </section>
+
+
+
+    <!-- ===== CATEGORY ===== -->
+
+    <section id="categories">
+
+        <h2>Danh mục</h2>
+
+        <div id="categoryContainer">
+
+            <!-- JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===== PRODUCTS ===== -->
+
+    <section id="products">
+
+        <h2>Sản phẩm</h2>
+
+        <div id="productContainer">
+
+            <!-- JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===== NEWS ===== -->
+
+    <section id="news">
+
+        <h2>Tin tức</h2>
+
+        <div id="newsContainer">
+
+            <!-- JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===== ABOUT ===== -->
+
+    <section id="about">
+
+        <h2>Giới thiệu</h2>
+
+        <div id="aboutContainer">
+
+            <!-- JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===== CONTACT ===== -->
+
+    <section id="contact">
+
+        <h2>Liên hệ</h2>
+
+        <div id="contactContainer">
+
+            <!-- JS -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ===== FOOTER ===== -->
+
+    <footer>
+
+        <div id="footerContainer">
+
+            © 2026 PIN SHOP
+
+        </div>
+
+    </footer>
+
+<!-- ================= PRODUCT POPUP ================= -->
+<div id="productPopup" class="popup hidden">
+
+    <div class="popup-content">
+
+        <span id="closePopup" class="close-btn">×</span>
+
+        <img id="popupImage" src="">
+
+        <h2 id="popupName"></h2>
+
+        <p id="popupPrice"></p>
+
+        <p id="popupCategory"></p>
+
+    </div>
+
+</div>
+
+<div id="productDetail" class="detail hidden">
+
+    <div class="detail-box">
+
+        <span id="closeDetail" class="close-btn">×</span>
+
+        <div class="detail-content">
+
+            <img id="detailImage">
+
+            <div class="detail-info">
+
+                <h2 id="detailName"></h2>
+
+                <p id="detailPrice"></p>
+
+                <p id="detailCategory"></p>
+
+                <button class="buy-btn">Liên hệ Zalo</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>PIN SHOP ADMIN - CÔNG CỤ SALE</title>
+</head>
+<body>
+    <h3>Công cụ Import (Copy từ Excel dán vào dưới)</h3>
+    <textarea id="quickInput" style="width:100%; height:150px;" placeholder="Tên [Tab] Giá [Tab] Danh mục [Tab] Link ảnh"></textarea>
+    <button id="quickImportBtn">Tạo mã CSV để dán vào Sheets</button>
+    <pre id="previewBody" style="background: #f0f0f0; padding: 15px; margin-top: 20px;"></pre>
+
+    <script>
+        document.getElementById("quickImportBtn").onclick = () => {
+            const raw = document.getElementById("quickInput").value;
+            const lines = raw.split('\n');
+            let csvOutput = "Name,Price,Category,Image\n";
+            
+            lines.forEach(line => {
+                if (!line.trim()) return;
+                // Tách dữ liệu (hỗ trợ copy trực tiếp từ Excel dán vào)
+                const parts = line.split('\t');
+                if (parts.length >= 2) {
+                    csvOutput += `${parts[0]},${parts[1].replace(/[^0-9]/g, '')},${parts[2] || 'Khác'},${parts[3] || ''}\n`;
+                }
+            });
+            
+            document.getElementById("previewBody").innerText = csvOutput;
+            alert("Đã tạo CSV! Hãy copy toàn bộ nội dung trong ô xám dán vào Google Sheets.");
+        };
+    </script>
+</body>
+</html>
