@@ -321,58 +321,57 @@ section h2 {
     box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3);
 }
 
-/* ================= HEADER BỐ TRÍ MỚI ================= */
+/* 1. Header: Cấu trúc chính */
 header {
+    display: flex;
+    justify-content: space-between; /* Đẩy logo sang trái, nav sang phải, search ở giữa */
+    align-items: center;
+    padding: 12px 30px; /* Khoảng cách đều 2 bên */
+    background: #ee4d2d;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #ee4d2d;
-    display: flex;
-    justify-content: space-between; /* Căn đều logo - search - nav */
-    align-items: center;
-    padding: 12px 5%;
-    height: 70px; /* Cố định chiều cao header */
+    height: 70px; /* Cố định chiều cao */
 }
 
-/* 1. Logo: Cố định chiều rộng để không bị đẩy */
-.logo { 
-    flex: 0 0 200px; 
+/* 2. Logo: Đẩy ra khỏi mép trái */
+.logo {
+    padding-left: 20px; /* Khoảng cách từ mép màn hình vào logo */
+    flex-shrink: 0;     /* Không cho phép logo bị co lại */
 }
 
-/* 2. Search: Tự động dãn ra chiếm không gian ở giữa */
+/* 3. Search: Chiếm không gian ở giữa, nhưng không được đè lên các bên */
 .header-search {
-    flex: 1;
-    max-width: 500px; /* Giới hạn độ dài để không chạm logo/nav */
+    flex: 1;            /* Ăn hết phần trống còn lại */
+    max-width: 500px;   /* Giới hạn độ rộng tối đa */
+    margin: 0 30px;     /* Khoảng cách thở với logo và nav */
     display: flex;
     background: white;
     border-radius: 4px;
     padding: 3px;
-    margin: 0 20px; /* Tạo khoảng thở 2 bên */
 }
 
-/* 3. Navbar: Cố định chiều rộng, căn lề phải */
-#navbar { 
-    flex: 0 0 200px; 
-    display: flex; 
-    gap: 20px; 
-    justify-content: flex-end; 
+/* 4. Navbar: Ép cứng trên 1 dòng */
+#navbar {
+    display: flex;
+    gap: 20px;
+    white-space: nowrap; /* CÂU LỆNH QUAN TRỌNG: Không cho xuống dòng */
+    flex-shrink: 0;      /* CÂU LỆNH QUAN TRỌNG: Không cho co lại dù màn hình nhỏ */
+    align-items: center;
 }
 
-/* Xử lý chữ cho đậm và sắc nét */
-#navbar a { 
-    color: #ffffff; /* Trắng tinh, không dùng xám */
-    text-decoration: none; 
-    font-size: 16px; 
-    font-weight: 700; /* Đậm */
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
     padding: 8px 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
-    opacity: 1; /* KHÔNG để opacity < 1 */
-    text-transform: uppercase; /* Thêm chữ hoa nhìn sẽ chuyên nghiệp hơn */
+    opacity: 1;
 }
 
-/* Hiệu ứng làm nổi bật nút menu */
-#navbar a:hover { 
-    background: rgba(255, 255, 255, 0.2); 
+#navbar a:hover {
+    background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
