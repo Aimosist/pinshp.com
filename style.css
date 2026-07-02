@@ -254,33 +254,29 @@ section h2 {
 
 .logo-wrapper {
     display: flex;
-    align-items: baseline; /* CHÌA KHÓA: Ép chân của M, AI và BATERÍA thẳng hàng tắp */
-    gap: 2px; /* Kéo chữ AI sát vào chữ M */
+    align-items: baseline; /* Căn bằng đáy chữ, luôn thẳng hàng */
+    gap: 2px;
     text-decoration: none;
 }
 
 .icon-m {
-    height: 54px;
+    height: 34px; /* Đã thu nhỏ từ 54px xuống 34px cho vừa vặn */
     width: auto;
-    /* Dịch nhẹ icon xuống 1-2px để chân chữ M chạm đúng vào phần chân quang học của font chữ */
-    transform: translateY(2px); 
 }
 
 .text-ai {
-    font-size: 54px;
+    font-size: 38px; /* Thu nhỏ cỡ chữ AI */
     font-weight: 900;
     color: white;
     font-family: system-ui, -apple-system, sans-serif;
-    letter-spacing: -1.5px; /* Ép chữ A và I gần lại nhìn cứng cáp hơn */
+    letter-spacing: -1.5px; 
 }
 
 .text-bateria {
-    font-size: 36px;
+    font-size: 25px; /* Kích thước BATERÍA bằng đúng 2/3 chữ AI (Tỷ lệ 3:2) */
     font-weight: 800;
     color: white;
     font-family: system-ui, -apple-system, sans-serif;
     letter-spacing: 0.5px;
-    margin-left: 8px; /* Tách BATERÍA ra một chút cho dễ đọc */
-}
-    letter-spacing: 1px;
+    margin-left: 6px; /* Cách chữ AI ra một xíu cho thoáng */
 }
