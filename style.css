@@ -114,7 +114,7 @@ section {
     max-height: 66px; /* Đảm bảo chỉ hiển thị tối đa 2 dòng */
     overflow: hidden; 
     display: -webkit-box; 
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical; 
 }
 .product-price { 
