@@ -56,20 +56,13 @@
     spaceBetween: 30,
     centeredSlides: true,
     autoplay: {
-      delay: 2500, // Tự chuyển ảnh sau 2.5 giây
+      delay: 3000, // Ảnh đổi mỗi 3 giây
       disableOnInteraction: false,
     },
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
     },
-    loop: true, // Cho phép xoay vòng vô tận
-  });
-</script>
-
-<script>
-  var swiper = new Swiper(".mySwiper", {
-    autoplay: { delay: 3000, disableOnInteraction: false },
     loop: true,
   });
 </script>
@@ -133,13 +126,6 @@
             <p>Chúng tôi cam kết sản phẩm chất lượng, giá nhà phân phối, không qua trung gian.</p>
         </div>
     </section>
-
-            <!-- JS -->
-
-        </div>
-
-    </section>
-
 
 
     <!-- ===== CONTACT ===== -->
@@ -212,9 +198,13 @@
     </div>
 
 </div>
-<script src="app.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="app.js"></script>
+<script>
+  var swiper = new Swiper(".mySwiper", { ... });
+</script>
     
 </body>
 
