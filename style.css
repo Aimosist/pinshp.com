@@ -377,3 +377,28 @@ footer{
     background: #ee4d2d;
     color: white;
 }
+
+/* 1. Tạo khoảng cách giữa Tiêu đề (h2) và nội dung bên dưới */
+section h2 {
+    margin-bottom: 20px; /* Thêm khoảng trống dưới tiêu đề */
+    font-size: 20px;     /* Chỉnh cỡ chữ tiêu đề nếu muốn */
+}
+
+/* 2. Tạo khoảng trống bên trong mỗi ô sản phẩm (để thông tin không sát mép) */
+.product {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 10px; /* Tạo khoảng trống ở đáy ô sản phẩm */
+}
+
+/* 3. Tạo khoảng cách giữa các hàng sản phẩm (nếu dùng grid) */
+#productContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px; /* Tăng gap để các sản phẩm rời nhau hơn */
+}
