@@ -82,9 +82,9 @@ section {
 
 #productContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px; /* Khoảng cách giữa các ô */
-    margin-bottom: 30px; /* Khoảng cách dưới lưới sản phẩm */
+    grid-template-columns: repeat(5, 1fr); /* Ép đúng 5 cột */
+    gap: 20px; 
+    margin-bottom: 30px;
 }
 
 .product {
