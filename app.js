@@ -61,25 +61,19 @@ function renderCategories(list) {
     const categories = [...new Set(list.map(p => p.category))];
 
     categoryContainer.innerHTML = "";
-    categoryContainer.innerHTML += `<button onclick="filterByCategory('all')">Tất cả</button>`;
+    
+    // Nút "Tất cả" - Thêm class category-btn
+    categoryContainer.innerHTML += `<button class="category-btn active" onclick="filterByCategory('all', this)">Tất cả</button>`;
 
+    // Tạo các nút danh mục - Thêm class category-btn
     categories.forEach(cat => {
         if(cat && cat.trim() !== "") { 
-            categoryContainer.innerHTML += `<button onclick="filterByCategory('${cat}')">${cat}</button>`;
+            categoryContainer.innerHTML += `<button class="category-btn" onclick="filterByCategory('${cat}', this)">${cat}</button>`;
         }
     });
 }
 
-// Hàm lọc sản phẩm (Đã sửa lỗi)
-function filterByCategory(category) {
-    currentPage = 1; // Reset về trang 1 khi bấm danh mục mới
-    if (category === 'all') {
-        displayedProducts = liveProducts;
-    } else {
-        displayedProducts = liveProducts.filter(p => p.category === category);
-    }
-    renderProducts(displayedProducts); // Hiển thị list đã lọc
-}
+filterByCategory
 
 // 5. HÀM LẤY DỮ LIỆU
 async function fetchProductsFromSheets() {
