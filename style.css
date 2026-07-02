@@ -251,3 +251,30 @@ section h2 {
     font-size: 16px; 
     margin: 10px 0; 
 }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ee4d2d;
+    padding: 12px 24px;
+}
+
+#navbar {
+    display: flex;
+    gap: 20px;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600; /* Đậm vừa phải, không cần quá lố */
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+#navbar a:hover {
+    opacity: 1;
+    text-decoration: underline; /* Shopee hay dùng kiểu này */
+}
