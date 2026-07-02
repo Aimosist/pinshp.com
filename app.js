@@ -37,18 +37,12 @@ function renderProducts(list) {
     renderPagination(list.length);
 }
 
-// 4. THÊM HÀM MỚI NÀY VÀO DƯỚI HÀM RENDER
 function renderPagination(totalItems) {
     const totalPages = Math.ceil(totalItems / productsPerPage);
-    let container = document.getElementById("paginationContainer");
+    const container = document.getElementById("paginationContainer");
     
-    if (!container) {
-        container = document.createElement("div");
-        container.id = "paginationContainer";
-        container.style.textAlign = "center";
-        container.style.margin = "20px 0";
-        document.body.appendChild(container);
-    }
+    // Nếu không tìm thấy thẻ trong index.html thì dừng, không tự tạo lung tung
+    if (!container) return; 
     
     container.innerHTML = "";
     for (let i = 1; i <= totalPages; i++) {
@@ -57,13 +51,14 @@ function renderPagination(totalItems) {
         btn.style.margin = "0 5px";
         btn.onclick = () => {
             currentPage = i;
-            renderProducts(liveProducts); // Dùng lại danh sách đã tải
-            window.scrollTo(0, 0); 
+            renderProducts(liveProducts);
+            window.scrollTo({ top: document.getElementById('products').offsetTop, behavior: 'smooth' });
         };
         if (i === currentPage) btn.style.fontWeight = "bold";
         container.appendChild(btn);
     }
 }
+
 // 3. Hàm lấy dữ liệu
 async function fetchProductsFromSheets() {
     try {
