@@ -1,7 +1,7 @@
 // 1. CẤU HÌNH
 const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP1jjCYB6YMQAZ-B3IgrxpbeMaumndi4OP0yk5AJDu_7dLAQ/exec';
 let liveProducts = []; 
-let displayedProducts = []; // Biến này để lưu danh sách đang hiển thị (sau khi lọc)
+let displayedProducts = []; 
 let currentPage = 1;
 const productsPerPage = 15; 
 
@@ -20,7 +20,7 @@ function renderPagination(list) {
 
         btn.onclick = () => {
             currentPage = i;
-            renderProducts(list); // Truyền đúng danh sách đang hiển thị vào
+            renderProducts(list); 
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
         };
         container.appendChild(btn);
@@ -50,7 +50,7 @@ function renderProducts(list) {
         `;
     });
 
-    renderPagination(list); // Truyền danh sách vào hàm phân trang
+    renderPagination(list); 
 }
 
 // 4. HÀM DANH MỤC
@@ -62,10 +62,10 @@ function renderCategories(list) {
 
     categoryContainer.innerHTML = "";
     
-    // Nút "Tất cả" - Thêm class category-btn
+    // Nút "Tất cả"
     categoryContainer.innerHTML += `<button class="category-btn active" onclick="filterByCategory('all', this)">Tất cả</button>`;
 
-    // Tạo các nút danh mục - Thêm class category-btn
+    // Tạo các nút danh mục
     categories.forEach(cat => {
         if(cat && cat.trim() !== "") { 
             categoryContainer.innerHTML += `<button class="category-btn" onclick="filterByCategory('${cat}', this)">${cat}</button>`;
@@ -73,7 +73,25 @@ function renderCategories(list) {
     });
 }
 
-filterByCategory
+// HÀM LỌC SẢN PHẨM (Đã hoàn thiện)
+function filterByCategory(category, btnElement) {
+    currentPage = 1; // Reset về trang 1
+    
+    // Đổi màu nút active
+    if (btnElement) {
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+    }
+
+    // Lọc sản phẩm
+    if (category === 'all') {
+        displayedProducts = liveProducts;
+    } else {
+        displayedProducts = liveProducts.filter(p => p.category === category);
+    }
+    
+    renderProducts(displayedProducts); 
+}
 
 // 5. HÀM LẤY DỮ LIỆU
 async function fetchProductsFromSheets() {
@@ -83,7 +101,7 @@ async function fetchProductsFromSheets() {
         const data = await response.json();
         
         liveProducts = data; 
-        displayedProducts = data; // Mặc định lúc đầu hiển thị tất cả
+        displayedProducts = data; 
         
         renderProducts(displayedProducts); 
         renderCategories(liveProducts); 
