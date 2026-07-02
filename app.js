@@ -16,7 +16,6 @@ function renderProducts(list) {
         
         productContainer.innerHTML += `
             <div class="product">
-                // Thay thế đoạn cũ bằng đoạn này:
                <img src="${imgUrl}" onerror="this.src='https://placehold.co/150x150?text=PIN'">
                 <div class="product-info">
                     <p class="product-name">${p.name}</p>
