@@ -110,10 +110,12 @@ section {
 .product-name { 
     font-size: 18px; 
     font-weight: 680; 
-    line-height: 22px; /* Tăng nhẹ line-height để chữ thoáng hơn */
-    max-height: 66px; /* Đảm bảo chỉ hiển thị tối đa 2 dòng */
+    line-height: 22px; 
+    /* Tăng max-height lên 68px để trừ hao các trình duyệt render chữ khác nhau */
+    max-height: 68px; 
     overflow: hidden; 
     display: -webkit-box; 
+    /* Thay đổi từ 2 thành 3 để hiển thị 3 dòng */
     -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical; 
 }
