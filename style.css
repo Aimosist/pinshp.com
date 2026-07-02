@@ -161,8 +161,7 @@ section#products h2 {
 
 /* 2. Dành cho các Tiêu đề khác (Danh mục, Tin tức, Liên hệ) */
 section h2 {
-    font-size: 24px;
-    color: #333;
+    font-size: 28px;
     margin-bottom: 20px;
-    font-weight: 600;
+    font-weight: bold;
 }
