@@ -65,7 +65,6 @@ function renderCategories(list) {
     // Nút "Tất cả"
     categoryContainer.innerHTML += `<button class="category-btn active" onclick="filterByCategory('all', this)">Tất cả</button>`;
 
-    // Tạo các nút danh mục
     categories.forEach(cat => {
         if(cat && cat.trim() !== "") { 
             categoryContainer.innerHTML += `<button class="category-btn" onclick="filterByCategory('${cat}', this)">${cat}</button>`;
@@ -73,17 +72,17 @@ function renderCategories(list) {
     });
 }
 
-// HÀM LỌC SẢN PHẨM (Đã hoàn thiện)
+// HÀM LỌC SẢN PHẨM THEO DANH MỤC
 function filterByCategory(category, btnElement) {
-    currentPage = 1; // Reset về trang 1
+    // Reset ô tìm kiếm khi bấm chọn danh mục
+    document.getElementById("searchInput").value = ""; 
+    currentPage = 1;
     
-    // Đổi màu nút active
     if (btnElement) {
         document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
     }
 
-    // Lọc sản phẩm
     if (category === 'all') {
         displayedProducts = liveProducts;
     } else {
@@ -93,7 +92,39 @@ function filterByCategory(category, btnElement) {
     renderProducts(displayedProducts); 
 }
 
-// 5. HÀM LẤY DỮ LIỆU
+// 5. HÀM TÌM KIẾM (MỚI THÊM)
+function initSearch() {
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+
+    const performSearch = () => {
+        const query = searchInput.value.toLowerCase();
+        currentPage = 1;
+
+        // Bỏ active của các nút danh mục khi đang tìm kiếm
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+
+        if (query === "") {
+            displayedProducts = liveProducts;
+        } else {
+            displayedProducts = liveProducts.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                (p.category && p.category.toLowerCase().includes(query))
+            );
+        }
+        renderProducts(displayedProducts);
+    };
+
+    // Tìm khi bấm nút
+    searchBtn.addEventListener("click", performSearch);
+
+    // Tìm khi nhấn Enter
+    searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") performSearch();
+    });
+}
+
+// 6. HÀM LẤY DỮ LIỆU
 async function fetchProductsFromSheets() {
     try {
         const response = await fetch(API_URL);
@@ -105,6 +136,7 @@ async function fetchProductsFromSheets() {
         
         renderProducts(displayedProducts); 
         renderCategories(liveProducts); 
+        initSearch(); // Kích hoạt chức năng tìm kiếm sau khi có dữ liệu
         
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
