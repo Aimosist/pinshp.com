@@ -202,3 +202,21 @@ section h2 {
     font-weight: bold;
     text-decoration: none;
 }
+
+.swiper {
+    width: 100%;
+    height: 280px; /* Độ cao banner */
+    border-radius: 12px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cắt ảnh đẹp để lấp đầy khung */
+}
+
+/* Tùy chỉnh cho di động */
+@media(max-width:768px){
+    .swiper { height: 180px; }
+}
