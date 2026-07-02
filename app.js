@@ -3,7 +3,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP
 let liveProducts = []; 
 let displayedProducts = []; 
 let currentPage = 1;
-const productsPerPage = 15; 
+const productsPerPage = window.innerWidth <= 768 ? 6 : 15; 
 
 // 2. HÀM PHÂN TRANG
 function renderPagination(list) {
