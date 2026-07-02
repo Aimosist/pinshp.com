@@ -376,3 +376,26 @@ header {
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
+
+/* --- CODE TỐI ƯU GIAO DIỆN (CHỈ DÁN VÀO CUỐI FILE) --- */
+
+/* 1. Mặc định Desktop giữ nguyên 5 cột như cũ */
+#productContainer {
+    grid-template-columns: repeat(5, 1fr) !important;
+}
+
+/* 2. Chỉ khi dùng Mobile mới ép về 2 cột */
+@media (max-width: 768px) {
+    #productContainer {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    /* Giới hạn 3 hàng = 6 sản phẩm */
+    .product:nth-child(n+7) {
+        display: none !important;
+    }
+    
+    header {
+        flex-wrap: wrap; /* Cho phép header xuống dòng nếu hẹp quá */
+        height: auto !important;
+    }
+}
