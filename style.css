@@ -353,3 +353,18 @@ footer{
     border-radius:8px;
     cursor:pointer;
 }
+
+/* Thêm vào cuối file style.css */
+#paginationContainer button {
+    padding: 8px 15px;
+    cursor: pointer;
+    border: 1px solid #ee4d2d;
+    background: white;
+    color: #ee4d2d;
+    border-radius: 4px;
+}
+
+#paginationContainer button:hover {
+    background: #ee4d2d;
+    color: white;
+}
