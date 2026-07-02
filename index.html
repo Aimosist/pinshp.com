@@ -20,14 +20,24 @@
     <!-- ===== HEADER ===== -->
 
 <header id="header">
+    
 <div class="logo">
     <a href="#home" class="logo-wrapper">
-        <svg class="icon-m" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
-            <rect x="22" y="4" width="16" height="4" rx="1" fill="white"/>
-            <rect x="15" y="11" width="30" height="15" rx="3" fill="white"/>
-            <path d="M 88 1 L 92 1 L 92 5 L 96 5 L 96 9 L 92 9 L 92 13 L 88 13 L 88 9 L 84 9 L 84 5 L 88 5 Z" fill="white"/>
-            <rect x="75" y="11" width="30" height="15" rx="3" fill="white"/>
-            <path fill-rule="evenodd" d="M10 100 L10 25 L45 25 L60 50 L75 25 L110 25 L110 100 L80 100 L80 65 L60 85 L40 65 L40 100 Z M68 40 L42 75 L57 75 L47 100 L78 65 L63 65 Z" fill="white"/>
+        <svg class="icon-m" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <mask id="cutout-mask">
+                    <rect width="100" height="100" fill="white"/>
+                    <rect x="7" y="5" width="14" height="4" rx="1" fill="black"/>
+                    <rect x="79" y="5" width="14" height="4" rx="1" fill="black"/>
+                    <rect x="84" y="0" width="4" height="14" rx="1" fill="black"/>
+                    <polygon points="62,35 38,65 52,65 42,90 68,55 54,55" fill="black"/>
+                </mask>
+            </defs>
+            <g mask="url(#cutout-mask)" fill="white">
+                <rect x="2" y="0" width="24" height="15" rx="3"/>
+                <rect x="74" y="0" width="24" height="15" rx="3"/>
+                <path d="M 0 100 L 0 10 L 28 10 L 50 45 L 72 10 L 100 10 L 100 100 L 72 100 L 72 45 L 50 75 L 28 45 L 28 100 Z"/>
+            </g>
         </svg>
         <span class="text-ai">AI</span>
         <span class="text-bateria">BATERÍA</span>
