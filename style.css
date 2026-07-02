@@ -321,38 +321,58 @@ section h2 {
     box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3);
 }
 
-/* 1. Tinh chỉnh lại Header và Logo */
+/* ================= HEADER BỐ TRÍ MỚI ================= */
 header {
-    padding: 12px 5%; /* Tăng padding 2 bên để không sát lề */
-    /* ... các thuộc tính cũ giữ nguyên ... */
-}
-
-.logo {
-    margin-left: 10px; /* Đẩy logo ra xa mép trái màn hình */
-}
-
-
-/* 2. Tinh chỉnh Navigation cho to và nổi bật */
-#navbar { 
-    display: flex; 
-    gap: 30px; /* Tăng khoảng cách giữa các mục */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ee4d2d;
+    display: flex;
+    justify-content: space-between; /* Căn đều logo - search - nav */
     align-items: center;
+    padding: 12px 5%;
+    height: 70px; /* Cố định chiều cao header */
 }
 
+/* 1. Logo: Cố định chiều rộng để không bị đẩy */
+.logo { 
+    flex: 0 0 200px; 
+}
+
+/* 2. Search: Tự động dãn ra chiếm không gian ở giữa */
+.header-search {
+    flex: 1;
+    max-width: 500px; /* Giới hạn độ dài để không chạm logo/nav */
+    display: flex;
+    background: white;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 0 20px; /* Tạo khoảng thở 2 bên */
+}
+
+/* 3. Navbar: Cố định chiều rộng, căn lề phải */
+#navbar { 
+    flex: 0 0 200px; 
+    display: flex; 
+    gap: 20px; 
+    justify-content: flex-end; 
+}
+
+/* Xử lý chữ cho đậm và sắc nét */
 #navbar a { 
-    color: white; 
+    color: #ffffff; /* Trắng tinh, không dùng xám */
     text-decoration: none; 
-    font-size: 16px;       /* Tăng size chữ */
-    font-weight: 600;      /* Làm chữ đậm hơn */
-    padding: 8px 15px;     /* Tăng vùng nhấn */
-    border-radius: 6px;    /* Bo góc nhẹ */
+    font-size: 16px; 
+    font-weight: 700; /* Đậm */
+    padding: 8px 12px;
+    border-radius: 6px;
     transition: all 0.3s ease;
-    opacity: 0.9;
+    opacity: 1; /* KHÔNG để opacity < 1 */
+    text-transform: uppercase; /* Thêm chữ hoa nhìn sẽ chuyên nghiệp hơn */
 }
 
-/* 3. Hiệu ứng làm menu nổi bật khi di chuột vào */
+/* Hiệu ứng làm nổi bật nút menu */
 #navbar a:hover { 
-    background: rgba(255, 255, 255, 0.2); /* Tạo nền mờ khi hover */
-    opacity: 1;
-    transform: translateY(-1px); /* Hiệu ứng nhấp nhô nhẹ */
+    background: rgba(255, 255, 255, 0.2); 
+    cursor: pointer;
 }
