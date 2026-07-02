@@ -280,3 +280,43 @@ section h2 {
     letter-spacing: 0.5px;
     margin-left: 6px; /* Cách chữ AI ra một xíu cho thoáng */
 }
+
+/* Container chứa danh mục */
+#categoryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Khoảng cách giữa các nút */
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+/* Style chung cho nút danh mục */
+.category-btn {
+    padding: 12px 24px;      /* Tăng kích thước nút */
+    font-size: 15px;         /* Chữ to hơn */
+    font-weight: 600;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;      /* Bo góc nhẹ nhàng */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Đổ bóng nhẹ */
+    color: #555;
+}
+
+/* Hiệu ứng khi di chuột */
+.category-btn:hover {
+    border-color: #ee4d2d;
+    color: #ee4d2d;
+    background-color: #fff5f3;
+    transform: translateY(-2px); /* Hiệu ứng nổi lên khi di chuột */
+}
+
+/* Hiệu ứng khi nút được chọn */
+.category-btn.active {
+    background-color: #ee4d2d;
+    color: white;
+    border-color: #ee4d2d;
+    box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3);
+}
