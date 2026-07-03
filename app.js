@@ -238,6 +238,17 @@ async function fetchProductsFromSheets() {
         if (!response.ok) throw new Error('Không thể kết nối tới Google Sheets');
         const data = await response.json();
         
+        // BẢO VỆ 1: Nếu Google Sheets gửi về gói tin báo lỗi (Object)
+        if (data && data.error) {
+            throw new Error(`[Lỗi Google Sheets] ${data.error}`);
+        }
+        
+        // BẢO VỆ 2: Đề phòng dữ liệu trả về bị lỗi định dạng không phải Mảng
+        if (!Array.isArray(data)) {
+            console.error("Dữ liệu thực tế nhận được:", data);
+            throw new Error("Dữ liệu trả về sai cấu trúc tiêu chuẩn (Không phải là một danh sách).");
+        }
+        
         liveProducts = data; 
         displayedProducts = data; 
         
@@ -247,6 +258,17 @@ async function fetchProductsFromSheets() {
         
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
+        
+        // Hiển thị thông báo lỗi trực quan lên giao diện thay vì để trống web
+        const productContainer = document.getElementById("productContainer");
+        if (productContainer) {
+            productContainer.innerHTML = `
+                <div style="color: #ff4d4f; text-align: center; width: 100%; padding: 30px; font-weight: bold;">
+                    Không thể tải danh sách sản phẩm.<br>
+                    <span style="font-size: 14px; font-weight: normal; color: #666;">Chi tiết: ${error.message}</span>
+                </div>
+            `;
+        }
     }
 }
 
