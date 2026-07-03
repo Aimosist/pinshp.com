@@ -302,3 +302,18 @@ function openProductPopup(index) {
     // 4. Hiển thị Pop-up dạng Flex để căn giữa màn hình
     document.getElementById("productModal").style.display = "flex";
 }
+
+// === DÁN THÊM ĐOẠN NÀY VÀO DƯỚI CÙNG FILE APP.JS ===
+
+// Hàm đóng Pop-up (Sửa triệt để lỗi Uncaught ReferenceError)
+function closeProductPopup() {
+    document.getElementById("productModal").style.display = "none";
+}
+
+// Bắt sự kiện: Nếu khách click ra vùng nền tối phía ngoài hộp thoại thì cũng tự đóng Pop-up
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById("productModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
