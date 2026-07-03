@@ -273,6 +273,9 @@ window.addEventListener('resize', () => {
 // =====================================================
 // HÀM ĐIỀU KHIỂN POP-UP CHI TIẾT SẢN PHẨM
 // =====================================================
+// =====================================================
+// HÀM ĐIỀU KHIỂN POP-UP CHI TIẾT SẢN PHẨM
+// =====================================================
 function openProductPopup(index) {
     const product = liveProducts[index];
     if (!product) return;
@@ -282,32 +285,20 @@ function openProductPopup(index) {
     document.getElementById("modalName").innerText = product.name;
     document.getElementById("modalPrice").innerText = Number(product.price).toLocaleString() + "đ";
     
-    // 2. Đổ dữ liệu từ trường mới trên Google Sheets (ví dụ cột đặt tên là description hoặc data)
-    // Dùng mẫu: product.tên_cột_viết_thường
-    const rawDescription = product.description || product.data || "Sản phẩm chính hãng, chất lượng cao. Vui lòng liên hệ để biết thêm chi tiết.";
+    // 2. NHẬN DIỆN CỘT "Data" (Chữ D viết hoa theo đúng tên cột trên Google Sheets của bạn)
+    let rawDescription = product.Data || product.data || "Sản phẩm chính hãng, chất lượng cao. Vui lòng liên hệ để biết thêm chi tiết.";
     
-    // Chuyển đổi các dấu xuống dòng trong Sheets thành thẻ <br> để hiển thị đúng hàng lối trên web
+    // Ép kiểu dữ liệu về dạng chữ để tránh lỗi nếu ô trong Sheets chỉ chứa toàn số
+    rawDescription = String(rawDescription);
+    
+    // Tự động chuyển các dấu xuống dòng (Alt + Enter trong Sheets) thành thẻ <br> trên Web
     document.getElementById("modalDescription").innerHTML = rawDescription.replace(/\n/g, "<br>");
 
-    // 3. TỐI ƯU: Cập nhật đường link Zalo riêng cho sản phẩm này!
-    // Khi khách bấm vào, Zalo tự soạn sẵn tin nhắn: "Tôi muốn tư vấn sản phẩm [Tên sản phẩm]" luôn
-    const zaloNumber = "09xxxxxxxx"; // <-- BẠN THAY SỐ ZALO CỦA BẠN VÀO ĐÂY
+    // 3. ĐIỀN SỐ ĐIỆN THOẠI ZALO CỦA BẠN (Tự động soạn tin nhắn khi khách bấm)
+    const zaloNumber = "0961417606"; 
     const textMessage = encodeURIComponent(`Chào shop, tôi muốn tư vấn sản phẩm: ${product.name}`);
     document.getElementById("modalZaloBtn").href = `https://zalo.me/${zaloNumber}?text=${textMessage}`;
 
-    // 4. Hiển thị Pop-up dạng Flex để căn giữa
+    // 4. Hiển thị Pop-up dạng Flex để căn giữa màn hình
     document.getElementById("productModal").style.display = "flex";
 }
-
-// Hàm đóng Pop-up
-function closeProductPopup() {
-    document.getElementById("productModal").style.display = "none";
-}
-
-// Bắt sự kiện: Nếu khách click ra vùng nền tối phía ngoài hộp thoại thì cũng tự đóng Pop-up
-window.addEventListener('click', (event) => {
-    const modal = document.getElementById("productModal");
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-});
