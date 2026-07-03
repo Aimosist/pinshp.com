@@ -10,9 +10,9 @@ let productsPerPage = getProductsPerPage();
 
 function getProductsPerPage() {
     const width = window.innerWidth;
-    if (width <= 768) return 6;        // Mobile: 2 cột x 3 hàng = 6 sản phẩm
-    else if (width <= 1024) return 9;  // Tablet/Cửa sổ vừa: 3 cột x 3 hàng = 9 sản phẩm
-    else return 15;                    // PC Full: 5 cột x 3 hàng = 15 sản phẩm
+    if (width <= 768) return 6;        // Mobile (Dưới 768px): 2 cột x 3 hàng = 6 sản phẩm
+    else if (width <= 1150) return 9;  // Tablet/Laptop (769px đến 1150px): 3 cột x 3 hàng = 9 sản phẩm
+    else return 15;                    // PC màn hình lớn (Trên 1150px): 5 cột x 3 hàng = 15 sản phẩm
 }
 
 // =====================================================
