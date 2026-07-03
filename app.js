@@ -141,8 +141,12 @@ function renderProducts(list) {
     productContainer.innerHTML = "";
     pageItems.forEach((p) => {
         const imgUrl = Array.isArray(p.image) ? p.image[0] : p.image;
+        
+        // Tìm vị trí gốc của sản phẩm này trong mảng liveProducts để truyền vào Pop-up
+        const globalIndex = liveProducts.indexOf(p);
+
         productContainer.innerHTML += `
-            <div class="product">
+            <div class="product" style="cursor: pointer;" onclick="openProductPopup(${globalIndex})">
                <img src="${imgUrl}" onerror="this.src='https://placehold.co/150x150?text=PIN'">
                <div class="product-info">
                    <p class="product-name">${p.name}</p>
@@ -264,4 +268,46 @@ window.addEventListener('resize', () => {
             renderProducts(displayedProducts); 
         }
     }, 150); 
+});
+
+// =====================================================
+// HÀM ĐIỀU KHIỂN POP-UP CHI TIẾT SẢN PHẨM
+// =====================================================
+function openProductPopup(index) {
+    const product = liveProducts[index];
+    if (!product) return;
+
+    // 1. Đổ dữ liệu Ảnh, Tên, Giá vào Pop-up
+    document.getElementById("modalImg").src = Array.isArray(product.image) ? product.image[0] : product.image;
+    document.getElementById("modalName").innerText = product.name;
+    document.getElementById("modalPrice").innerText = Number(product.price).toLocaleString() + "đ";
+    
+    // 2. Đổ dữ liệu từ trường mới trên Google Sheets (ví dụ cột đặt tên là description hoặc data)
+    // Dùng mẫu: product.tên_cột_viết_thường
+    const rawDescription = product.description || product.data || "Sản phẩm chính hãng, chất lượng cao. Vui lòng liên hệ để biết thêm chi tiết.";
+    
+    // Chuyển đổi các dấu xuống dòng trong Sheets thành thẻ <br> để hiển thị đúng hàng lối trên web
+    document.getElementById("modalDescription").innerHTML = rawDescription.replace(/\n/g, "<br>");
+
+    // 3. TỐI ƯU: Cập nhật đường link Zalo riêng cho sản phẩm này!
+    // Khi khách bấm vào, Zalo tự soạn sẵn tin nhắn: "Tôi muốn tư vấn sản phẩm [Tên sản phẩm]" luôn
+    const zaloNumber = "09xxxxxxxx"; // <-- BẠN THAY SỐ ZALO CỦA BẠN VÀO ĐÂY
+    const textMessage = encodeURIComponent(`Chào shop, tôi muốn tư vấn sản phẩm: ${product.name}`);
+    document.getElementById("modalZaloBtn").href = `https://zalo.me/${zaloNumber}?text=${textMessage}`;
+
+    // 4. Hiển thị Pop-up dạng Flex để căn giữa
+    document.getElementById("productModal").style.display = "flex";
+}
+
+// Hàm đóng Pop-up
+function closeProductPopup() {
+    document.getElementById("productModal").style.display = "none";
+}
+
+// Bắt sự kiện: Nếu khách click ra vùng nền tối phía ngoài hộp thoại thì cũng tự đóng Pop-up
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById("productModal");
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
 });
