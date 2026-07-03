@@ -280,6 +280,8 @@ function openProductPopup(index) {
     const product = liveProducts[index];
     if (!product) return;
 
+    console.log("Dữ liệu sản phẩm nhận được từ Sheet:", product);
+    
     // 1. Đổ dữ liệu Ảnh, Tên, Giá vào Pop-up
     document.getElementById("modalImg").src = Array.isArray(product.image) ? product.image[0] : product.image;
     document.getElementById("modalName").innerText = product.name;
