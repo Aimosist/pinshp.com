@@ -1,7 +1,7 @@
 // =====================================================
 // 1. CẤU HÌNH & TỰ ĐỘNG TÍNH SỐ SẢN PHẨM THEO MÀN HÌNH
 // =====================================================
-const API_URL = 'https://script.google.com/macros/s/AKfycbwE0BZUEOwuFfuyUiUCToKUmfN0lYyzUlp1_A0z74QSUOKY9NbmqAcA7YsWuW2pgU9Srw/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxioh2uemDnuOpDfkIbGR5D8h6MA-T8S9eLXJRMfXcnFvk5j4WiYt3HjFSzg08mCdX5vA/exec';
 let liveProducts = []; 
 let displayedProducts = []; 
 let currentPage = 1;
