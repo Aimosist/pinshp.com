@@ -377,49 +377,80 @@ header {
     cursor: pointer;
 }
 
-/* --- TỐI ƯU RESPONSIVE (Dán đoạn này xuống cuối cùng file) --- */
+/* ==========================================================================
+   TỐI ƯU RESPONSIVE CHUẨN (THAY THẾ TOÀN BỘ CODE Ở CUỐI FILE CỦA BẠN)
+   ========================================================================== */
 
+/* 1. Màn hình máy tính nhỏ / Tablet ngang / Landscape Mobile (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    header {
+        padding: 10px 3% !important;
+        gap: 15px !important;
+    }
+
+    .header-search {
+        max-width: 280px !important; /* Thu nhỏ thanh tìm kiếm để nhường chỗ cho Menu */
+        margin: 0 10px !important;
+    }
+
+    #navbar {
+        gap: 12px !important;
+    }
+
+    #navbar a {
+        font-size: 14px !important;
+        padding: 6px 8px !important;
+    }
+
+    /* Chuyển từ 5 cột xuống 3 cột để không bị bóp méo sản phẩm */
+    #productContainer {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px !important;
+    }
+}
+
+/* 2. Màn hình Điện thoại / Tablet dọc (Dưới 768px) */
 @media (max-width: 768px) {
-    /* 1. Header: Chống tràn, cho phép xuống dòng */
+    /* Header tự động bẻ dòng, không bao giờ bị overflow che mất nút */
     header {
         flex-wrap: wrap !important;
         height: auto !important;
-        padding: 10px !important;
+        padding: 12px 5% !important;
         gap: 10px !important;
     }
-    
-    /* Đảm bảo navbar không bị mất hoặc đè lên search */
-    #navbar { width: 100%; justify-content: center; flex-wrap: wrap; }
 
-    /* 2. Grid: Chỉ ép 2 cột */
+    .logo {
+        order: 1;
+    }
+
+    #navbar {
+        order: 2;
+        width: auto;
+        gap: 10px !important;
+    }
+
+    #navbar a {
+        font-size: 13px !important;
+        padding: 4px 6px !important;
+    }
+
+    /* Đẩy thanh tìm kiếm xuống hàng dưới cùng cho rộng rãi */
+    .header-search {
+        order: 3;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin: 5px 0 0 0 !important;
+    }
+
+    /* Ép chuẩn 2 cột sản phẩm */
     #productContainer {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
 }
 
-/* --- SỬA LỖI HEADER TRÀN BỐ CỤC (Màn hình trung bình: 769px - 1024px) --- */
-@media (min-width: 769px) and (max-width: 1024px) {
-    header {
-        padding: 10px 20px !important; /* Giảm padding từ 10% xuống để lấy không gian */
-        gap: 15px !important;         /* Giảm khoảng cách giữa logo - search - menu */
-    }
-
-    .header-search {
-        max-width: 300px !important;  /* Giới hạn độ rộng search bar để menu không bị đẩy */
-        margin: 0 10px !important;
-    }
-
-    #navbar {
-        gap: 10px !important;         /* Thu hẹp khoảng cách menu */
-    }
-
-    #navbar a {
-        font-size: 13px !important;   /* Giảm cỡ chữ menu một chút để vừa vặn */
-    }
-}
-
-/* Đảm bảo không có phần tử nào "thừa" bị out box */
-body {
-    overflow-x: hidden; /* Chống cuộn ngang ngoài ý muốn */
+/* Ngăn lỗi cuộn ngang màn hình (Out of box) trên mọi thiết bị */
+body, html {
+    overflow-x: hidden !important;
+    width: 100%;
 }
