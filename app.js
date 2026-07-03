@@ -3,7 +3,15 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP
 let liveProducts = []; 
 let displayedProducts = []; 
 let currentPage = 1;
-const productsPerPage = window.innerWidth <= 768 ? 6 : 15; 
+
+let productsPerPage = getProductsPerPage();
+
+function getProductsPerPage() {
+    const width = window.innerWidth;
+    if (width <= 768) return 6;        // Mobile: 2 cột x 3 hàng = 6 sản phẩm
+    else if (width <= 1024) return 9;  // Tablet/Cửa sổ vừa: 3 cột x 3 hàng = 9 sản phẩm
+    else return 15;                    // PC Full: 5 cột x 3 hàng = 15 sản phẩm
+}
 
 // 2. HÀM PHÂN TRANG
 function renderPagination(list) {
@@ -145,3 +153,19 @@ async function fetchProductsFromSheets() {
 
 // Khởi chạy
 document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
+
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const newPerPage = getProductsPerPage();
+        
+        // Nếu kích thước cửa sổ thay đổi làm thay đổi số sản phẩm trên 1 trang
+        if (productsPerPage !== newPerPage) {
+            productsPerPage = newPerPage; // Cập nhật số lượng mới
+            currentPage = 1;              // Đưa về trang 1 để không bị lỗi trống trang
+            renderProducts(displayedProducts); // Vẽ lại sản phẩm ngay lập tức
+        }
+    }, 150); // Đợi 150ms sau khi người dùng dừng kéo chuột mới tự lùi trang
+});
