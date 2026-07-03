@@ -1,4 +1,6 @@
-// 1. CẤU HÌNH
+// =====================================================
+// 1. CẤU HÌNH & TỰ ĐỘNG TÍNH SỐ SẢN PHẨM THEO MÀN HÌNH
+// =====================================================
 const API_URL = 'https://script.google.com/macros/s/AKfycbypBd6bsZ6ZtGxF5xf6zdJP1jjCYB6YMQAZ-B3IgrxpbeMaumndi4OP0yk5AJDu_7dLAQ/exec';
 let liveProducts = []; 
 let displayedProducts = []; 
@@ -13,29 +15,121 @@ function getProductsPerPage() {
     else return 15;                    // PC Full: 5 cột x 3 hàng = 15 sản phẩm
 }
 
-// 2. HÀM PHÂN TRANG
+// =====================================================
+// 2. HÀM PHÂN TRANG (CHUẨN SHOPEE: MŨI TÊN + Ô GÕ TRANG)
+// =====================================================
 function renderPagination(list) {
     const totalPages = Math.ceil(list.length / productsPerPage);
     const container = document.getElementById("paginationContainer");
     if (!container) return;
     
-    container.innerHTML = "";
-    
-    for (let i = 1; i <= Math.min(totalPages, 5); i++) {
-        const btn = document.createElement("button");
-        btn.innerText = i;
-        if (i === currentPage) btn.classList.add("active");
+    // Nếu chỉ có 1 trang hoặc không có sản phẩm thì ẩn phân trang
+    if (totalPages <= 1) {
+        container.innerHTML = "";
+        return;
+    }
 
-        btn.onclick = () => {
-            currentPage = i;
-            renderProducts(list); 
-            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    container.innerHTML = "";
+
+    // 1. Nút Mũi tên Lùi (Prev ❮)
+    const prevBtn = document.createElement("button");
+    prevBtn.innerHTML = "❮";
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => changePage(currentPage - 1, list);
+    container.appendChild(prevBtn);
+
+    // 2. Tính toán dải trang hiển thị xung quanh trang hiện tại (Tránh bị dài quá tải)
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, currentPage + 1);
+
+    if (currentPage === 1) endPage = Math.min(totalPages, 3);
+    if (currentPage === totalPages) startPage = Math.max(1, totalPages - 2);
+
+    // Hiển thị trang 1 và dấu ...
+    if (startPage > 1) {
+        container.appendChild(createPageBtn(1, list));
+        if (startPage > 2) {
+            const dots = document.createElement("span");
+            dots.innerText = "...";
+            dots.className = "page-dots";
+            container.appendChild(dots);
+        }
+    }
+
+    // Hiển thị các trang ở giữa
+    for (let i = startPage; i <= endPage; i++) {
+        container.appendChild(createPageBtn(i, list));
+    }
+
+    // Hiển thị dấu ... và trang cuối cùng
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            const dots = document.createElement("span");
+            dots.innerText = "...";
+            dots.className = "page-dots";
+            container.appendChild(dots);
+        }
+        container.appendChild(createPageBtn(totalPages, list));
+    }
+
+    // 3. Nút Mũi tên Tiến (Next ❯)
+    const nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "❯";
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => changePage(currentPage + 1, list);
+    container.appendChild(nextBtn);
+
+    // 4. Ô gõ số trang để nhảy nhanh (Jump to page)
+    const jumpContainer = document.createElement("div");
+    jumpContainer.className = "pagination-jump";
+    jumpContainer.innerHTML = `
+        <span>Đến trang:</span>
+        <input type="number" id="jumpInput" min="1" max="${totalPages}" value="${currentPage}">
+        <button id="jumpBtn">Đi</button>
+    `;
+    container.appendChild(jumpContainer);
+
+    // Bắt sự kiện khi bấm nút "Đi" hoặc nhấn Enter ở ô gõ trang
+    setTimeout(() => {
+        const jumpInput = document.getElementById("jumpInput");
+        const jumpBtn = document.getElementById("jumpBtn");
+        if (!jumpInput || !jumpBtn) return;
+        
+        const goJump = () => {
+            let targetPage = parseInt(jumpInput.value);
+            if (isNaN(targetPage) || targetPage < 1) targetPage = 1;
+            if (targetPage > totalPages) targetPage = totalPages;
+            changePage(targetPage, list);
         };
-        container.appendChild(btn);
+        jumpBtn.onclick = goJump;
+        jumpInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") goJump();
+        });
+    }, 0);
+}
+
+// Hàm phụ trợ cho Phân trang: Tạo nút số trang
+function createPageBtn(pageNumber, list) {
+    const btn = document.createElement("button");
+    btn.innerText = pageNumber;
+    if (pageNumber === currentPage) btn.classList.add("active");
+    btn.onclick = () => changePage(pageNumber, list);
+    return btn;
+}
+
+// Hàm phụ trợ cho Phân trang: Chuyển trang và cuộn mượt lên đầu danh sách sản phẩm
+function changePage(newPage, list) {
+    currentPage = newPage;
+    renderProducts(list);
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+        productsSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
+// =====================================================
 // 3. HÀM HIỂN THỊ SẢN PHẨM
+// =====================================================
 function renderProducts(list) {
     const productContainer = document.getElementById("productContainer");
     if (!productContainer) return;
@@ -61,7 +155,9 @@ function renderProducts(list) {
     renderPagination(list); 
 }
 
+// =====================================================
 // 4. HÀM DANH MỤC
+// =====================================================
 function renderCategories(list) {
     const categoryContainer = document.getElementById("categoryContainer");
     if (!categoryContainer) return;
@@ -82,7 +178,6 @@ function renderCategories(list) {
 
 // HÀM LỌC SẢN PHẨM THEO DANH MỤC
 function filterByCategory(category, btnElement) {
-    // Reset ô tìm kiếm khi bấm chọn danh mục
     document.getElementById("searchInput").value = ""; 
     currentPage = 1;
     
@@ -100,7 +195,9 @@ function filterByCategory(category, btnElement) {
     renderProducts(displayedProducts); 
 }
 
-// 5. HÀM TÌM KIẾM (MỚI THÊM)
+// =====================================================
+// 5. HÀM TÌM KIẾM
+// =====================================================
 function initSearch() {
     const searchInput = document.getElementById("searchInput");
     const searchBtn = document.getElementById("searchBtn");
@@ -109,7 +206,6 @@ function initSearch() {
         const query = searchInput.value.toLowerCase();
         currentPage = 1;
 
-        // Bỏ active của các nút danh mục khi đang tìm kiếm
         document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
 
         if (query === "") {
@@ -123,16 +219,15 @@ function initSearch() {
         renderProducts(displayedProducts);
     };
 
-    // Tìm khi bấm nút
     searchBtn.addEventListener("click", performSearch);
-
-    // Tìm khi nhấn Enter
     searchInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") performSearch();
     });
 }
 
-// 6. HÀM LẤY DỮ LIỆU
+// =====================================================
+// 6. HÀM LẤY DỮ LIỆU TỪ GOOGLE SHEETS
+// =====================================================
 async function fetchProductsFromSheets() {
     try {
         const response = await fetch(API_URL);
@@ -144,28 +239,29 @@ async function fetchProductsFromSheets() {
         
         renderProducts(displayedProducts); 
         renderCategories(liveProducts); 
-        initSearch(); // Kích hoạt chức năng tìm kiếm sau khi có dữ liệu
+        initSearch(); 
         
     } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
     }
 }
 
-// Khởi chạy
+// Khởi chạy khi tải trang
 document.addEventListener('DOMContentLoaded', fetchProductsFromSheets);
 
-
+// =================================================================
+// 7. TỰ ĐỘNG CĂN LẠI LƯỚI VÀ PHÂN TRANG KHI KÉO CỬA SỔ (KHÔNG CẦN F5)
+// =================================================================
 let resizeTimer;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         const newPerPage = getProductsPerPage();
         
-        // Nếu kích thước cửa sổ thay đổi làm thay đổi số sản phẩm trên 1 trang
         if (productsPerPage !== newPerPage) {
-            productsPerPage = newPerPage; // Cập nhật số lượng mới
-            currentPage = 1;              // Đưa về trang 1 để không bị lỗi trống trang
-            renderProducts(displayedProducts); // Vẽ lại sản phẩm ngay lập tức
+            productsPerPage = newPerPage; 
+            currentPage = 1;              
+            renderProducts(displayedProducts); 
         }
-    }, 150); // Đợi 150ms sau khi người dùng dừng kéo chuột mới tự lùi trang
+    }, 150); 
 });
