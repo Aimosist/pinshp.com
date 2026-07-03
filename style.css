@@ -459,23 +459,27 @@ header {
 }
 
 /* ==========================================================================
-   TỐI ƯU RESPONSIVE CHUẨN (THAY THẾ TOÀN BỘ CODE Ở CUỐI FILE CỦA BẠN)
-   ========================================================================== */
+   TỐI ƯU RESPONSIVE CHUẨN (KHẮC PHỤC TRÀN HEADER & ĐỒNG BỘ 3 CỘT)
+========================================================================== */
 
-/* 1. Màn hình máy tính nhỏ / Tablet ngang / Landscape Mobile (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* 1. Màn hình Laptop vừa / Tablet ngang (769px - 1150px) -> CHUẨN 3 CỘT */
+@media (min-width: 769px) and (max-width: 1150px) {
+    /* Thu gọn khoảng cách hai bên header */
     header {
-        padding: 10px 3% !important;
-        gap: 15px !important;
+        padding: 10px 2% !important;
+        gap: 10px !important;
     }
 
+    /* GIẢI PHÁP LỖI 2: Ép thanh tìm kiếm tự động co nhỏ lại, nhường chỗ cho Menu */
     .header-search {
-        max-width: 280px !important; /* Thu nhỏ thanh tìm kiếm để nhường chỗ cho Menu */
-        margin: 0 10px !important;
+        flex: 0 1 240px !important; /* Độ rộng tối đa 240px, cho phép tự co nhỏ nếu chật */
+        margin: 0 8px !important;
     }
 
+    /* Thu nhỏ khoảng cách giữa các chữ "Trang chủ", "Sản phẩm", "Tin tức" */
     #navbar {
-        gap: 12px !important;
+        gap: 10px !important;
+        flex-shrink: 0 !important; /* Tuyệt đối không cho menu bị bóp méo hay cắt chữ */
     }
 
     #navbar a {
@@ -483,55 +487,47 @@ header {
         padding: 6px 8px !important;
     }
 
-    /* Chuyển từ 5 cột xuống 3 cột để không bị bóp méo sản phẩm */
+    /* GIẢI PHÁP LỖI 3: Ép lưới sản phẩm hiện đúng 3 cột vuông vức */
     #productContainer {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 15px !important;
     }
 }
 
-/* 2. Màn hình Điện thoại / Tablet dọc (Dưới 768px) */
+/* 2. Màn hình Điện thoại / Tablet dọc (Dưới 768px) -> CHUẨN 2 CỘT */
 @media (max-width: 768px) {
-    /* Header tự động bẻ dòng, không bao giờ bị overflow che mất nút */
     header {
         flex-wrap: wrap !important;
         height: auto !important;
-        padding: 12px 5% !important;
+        padding: 12px 4% !important;
         gap: 10px !important;
     }
 
-    .logo {
-        order: 1;
+    .logo { 
+        order: 1; 
+    }
+    
+    #navbar { 
+        order: 2; 
+        width: auto; 
+        gap: 8px !important; 
+    }
+    
+    #navbar a { 
+        font-size: 13px !important; 
+        padding: 4px 6px !important; 
     }
 
-    #navbar {
-        order: 2;
-        width: auto;
-        gap: 10px !important;
-    }
-
-    #navbar a {
-        font-size: 13px !important;
-        padding: 4px 6px !important;
-    }
-
-    /* Đẩy thanh tìm kiếm xuống hàng dưới cùng cho rộng rãi */
+    /* Đẩy thanh tìm kiếm xuống hàng riêng biệt ở dưới cùng trên mobile */
     .header-search {
         order: 3;
         flex: 0 0 100% !important;
         max-width: 100% !important;
-        margin: 5px 0 0 0 !important;
+        margin: 6px 0 0 0 !important;
     }
 
-    /* Ép chuẩn 2 cột sản phẩm */
     #productContainer {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 10px !important;
     }
-}
-
-/* Ngăn lỗi cuộn ngang màn hình (Out of box) trên mọi thiết bị */
-body, html {
-    overflow-x: hidden !important;
-    width: 100%;
 }
