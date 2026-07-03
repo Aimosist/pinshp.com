@@ -531,3 +531,65 @@ header {
         gap: 10px !important;
     }
 }
+
+/* ==========================================================================
+   CẤU HÌNH NÚT ZALO FLOATING (GÓC DƯỚI PHẢI MÀN HÌNH)
+========================================================================== */
+.zalo-float {
+    position: fixed;
+    bottom: 24px;   /* Cách đáy màn hình 24px */
+    right: 24px;    /* Cách mép phải màn hình 24px */
+    width: 60px;
+    height: 60px;
+    background-color: #0068ff; /* Màu xanh chuẩn của Zalo */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 99999; /* Đảm bảo luôn nằm trên cùng tất cả các lớp khác */
+    transition: all 0.3s ease;
+    
+    /* Kích hoạt hiệu ứng sóng nhấp nháy liên tục */
+    animation: zalo-pulse 2s infinite;
+}
+
+/* Hiệu ứng phóng to nhẹ khi khách rê chuột vào */
+.zalo-float:hover {
+    transform: scale(1.1);
+    background-color: #0056d2; 
+}
+
+/* Căn chỉnh kích thước icon Zalo bên trong */
+.zalo-float img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* Logic chạy hiệu ứng vòng sóng lan tỏa (Pulse Effect) */
+@keyframes zalo-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 104, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(0, 104, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 104, 255, 0);
+    }
+}
+
+/* Tối ưu hiển thị trên Mobile (cho nhỏ lại một chút để không che mất sản phẩm) */
+@media (max-width: 768px) {
+    .zalo-float {
+        bottom: 16px;
+        right: 16px;
+        width: 50px;
+        height: 50px;
+    }
+    .zalo-float img {
+        width: 30px;
+        height: 30px;
+    }
+}
