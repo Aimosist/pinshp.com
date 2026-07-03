@@ -125,28 +125,109 @@ section {
     font-weight: 700; 
 }
 
-/* ================= PHÂN TRANG ================= */
+/* =====================================================
+   PHÂN TRANG CHUẨN SHOPEE (MŨI TÊN + Ô GÕ TRANG)
+===================================================== */
 #paginationContainer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+    align-items: center;
+    gap: 6px;
+    margin: 30px 0 40px 0;
 }
 
 #paginationContainer button {
-    padding: 8px 15px;
+    padding: 0 12px;
+    min-width: 38px;
+    height: 38px;
     cursor: pointer;
     background: white;
-    border: 1px solid #ee4d2d;
-    color: #ee4d2d;
+    border: 1px solid #e0e0e0;
+    color: #555;
     border-radius: 4px;
-    transition: 0.3s;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-#paginationContainer button:hover, 
+/* Nút mũi tên khi bị vô hiệu hóa (Đang ở trang 1 thì không lùi được) */
+#paginationContainer button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: #f9f9f9;
+    border-color: #eee;
+}
+
+#paginationContainer button:hover:not(:disabled), 
 #paginationContainer button.active {
     background: #ee4d2d;
     color: white;
+    border-color: #ee4d2d;
+    box-shadow: 0 3px 8px rgba(238, 77, 45, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Dấu ba chấm ... */
+.page-dots {
+    color: #888;
+    padding: 0 4px;
+    font-weight: bold;
+    user-select: none;
+}
+
+/* Khu vực ô gõ số trang để nhảy nhanh */
+.pagination-jump {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 15px;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.pagination-jump input {
+    width: 55px;
+    height: 38px;
+    padding: 0 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ee4d2d;
+    transition: 0.2s;
+}
+
+.pagination-jump input:focus {
+    border-color: #ee4d2d;
+    box-shadow: 0 0 0 2px rgba(238, 77, 45, 0.15);
+}
+
+/* Tối ưu phân trang trên Điện thoại (Dưới 768px) */
+@media (max-width: 768px) {
+    #paginationContainer {
+        gap: 4px;
+    }
+    #paginationContainer button {
+        min-width: 34px;
+        height: 34px;
+        font-size: 14px;
+        padding: 0 8px;
+    }
+    /* Đẩy ô gõ trang xuống dòng riêng cho thoáng màn hình mobile */
+    .pagination-jump {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }
 
 /* ================= NEWS & ABOUT ================= */
