@@ -219,7 +219,30 @@
 
 <a href="https://zalo.me/0961417606" class="zalo-float" target="_blank" rel="noopener noreferrer" title="Chat qua Zalo">
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo Chat">
-</a>    
+</a>
+
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeProductPopup()">&times;</span>
+        
+        <div class="modal-body">
+            <div class="modal-left">
+                <img id="modalImg" src="" alt="Sản phẩm">
+            </div>
+            <div class="modal-right">
+                <h2 id="modalName"></h2>
+                <p id="modalPrice"></p>
+                <hr>
+                <h4>Thông tin chi tiết:</h4>
+                <div id="modalDescription" class="modal-desc"></div>
+                
+                <a id="modalZaloBtn" href="#" target="_blank" class="modal-zalo-btn">
+                    💬 Liên Hệ Zalo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
     
 </body>
 
