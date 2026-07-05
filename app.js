@@ -319,7 +319,7 @@ function openProductPopup(index) {
     document.getElementById("modalDescription").innerHTML = rawDescription.replace(/\n/g, "<br>");
 
     // 3. ĐIỀN SỐ ĐIỆN THOẠI ZALO CỦA BẠN (Tự động soạn tin nhắn khi khách bấm)
-    const zaloNumber = "0961417606"; 
+    const zaloNumber = "0986119591"; 
     const textMessage = encodeURIComponent(`Chào shop, tôi muốn tư vấn sản phẩm: ${product.name}`);
     document.getElementById("modalZaloBtn").href = `https://zalo.me/${zaloNumber}?text=${textMessage}`;
 
